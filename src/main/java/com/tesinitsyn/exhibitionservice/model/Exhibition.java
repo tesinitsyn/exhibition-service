@@ -1,4 +1,4 @@
-package com.tesinitsyn.exhibitionservice.repository;
+package com.tesinitsyn.exhibitionservice.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
