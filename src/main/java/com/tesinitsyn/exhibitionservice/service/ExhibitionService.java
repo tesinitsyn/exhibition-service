@@ -47,7 +47,7 @@ public class ExhibitionService {
         return exhibitionRepository.findById(id)
             .map(ExhibitionConverter::toTransferObject)
             .orElseThrow(() -> {
-                //log.error("Exhibition with ID {} not found", id);
+                log.error("Exhibition with ID {} not found", id);
                 return new RuntimeException("Exhibition not found");
             });
     }
@@ -74,18 +74,18 @@ public class ExhibitionService {
     public ExhibitionTO updateExhibition(UUID id, ExhibitionTO exhibitionTO) {
         Exhibition existingExhibition = exhibitionRepository.findById(id)
             .orElseThrow(() -> {
-                //log.error("Exhibition with ID {} not found for update", id);
+                log.error("Exhibition with ID {} not found for update", id);
                 return new RuntimeException("Exhibition not found");
             });
 
-//        existingExhibition.setName(exhibitionTO.getName());
-//        existingExhibition.setDescription(exhibitionTO.getDescription());
-//        existingExhibition.setLocation(exhibitionTO.getLocation());
-//        existingExhibition.setDate(exhibitionTO.getDate());
-//        existingExhibition.setTime(exhibitionTO.getTime());
-//        existingExhibition.setPrice(exhibitionTO.getPrice());
-//        existingExhibition.setImage(exhibitionTO.getImage());
-//        existingExhibition.setRating(exhibitionTO.getRating());
+        existingExhibition.setName(exhibitionTO.getName());
+        existingExhibition.setDescription(exhibitionTO.getDescription());
+        existingExhibition.setLocation(exhibitionTO.getLocation());
+        existingExhibition.setDate(exhibitionTO.getDate());
+        existingExhibition.setTime(exhibitionTO.getTime());
+        existingExhibition.setPrice(exhibitionTO.getPrice());
+        existingExhibition.setImage(exhibitionTO.getImage());
+        existingExhibition.setRating(exhibitionTO.getRating());
 
         Exhibition updatedExhibition = exhibitionRepository.save(existingExhibition);
         return ExhibitionConverter.toTransferObject(updatedExhibition);
@@ -99,7 +99,7 @@ public class ExhibitionService {
     public void deleteExhibition(UUID id) {
         Optional<Exhibition> exhibitionOptional = exhibitionRepository.findById(id);
         if (exhibitionOptional.isEmpty()) {
-            //log.error("Exhibition with ID {} not found for deletion", id);
+            log.error("Exhibition with ID {} not found for deletion", id);
             throw new RuntimeException("Exhibition not found");
         }
 

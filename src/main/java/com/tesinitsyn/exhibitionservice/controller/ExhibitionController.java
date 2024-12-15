@@ -18,7 +18,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/exhibitions")
-@AllArgsConstructor
 @Log4j2
 public class ExhibitionController {
 
