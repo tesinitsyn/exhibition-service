@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+/**
+ * Репозиторий выставок.
+ */
 @Repository
 public interface ExhibitionRepository extends JpaRepository<Exhibition, UUID> {
 }

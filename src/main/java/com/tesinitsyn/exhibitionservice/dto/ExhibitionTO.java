@@ -1,24 +1,14 @@
-package com.tesinitsyn.exhibitionservice.model;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+package com.tesinitsyn.exhibitionservice.dto;
 import lombok.Data;
 
 import java.util.UUID;
 
 @Data
-@Table(name = "exhibition")
-public class Exhibition {
+public class ExhibitionTO {
 
     /**
      * Идентификатор.
      */
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(generator = "UUID", strategy = GenerationType.IDENTITY)
     private UUID id;
 
     /**
