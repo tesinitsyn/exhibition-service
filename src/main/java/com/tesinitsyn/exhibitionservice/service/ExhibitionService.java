@@ -1,10 +1,9 @@
 package com.tesinitsyn.exhibitionservice.service;
 
 import com.tesinitsyn.exhibitionservice.converter.ExhibitionConverter;
-import com.tesinitsyn.exhibitionservice.dto.ExhibitionTO;
+import com.tesinitsyn.exhibitionservice.transfer.ExhibitionTO;
 import com.tesinitsyn.exhibitionservice.model.Exhibition;
 import com.tesinitsyn.exhibitionservice.repository.ExhibitionRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -18,11 +17,14 @@ import java.util.stream.Collectors;
  * Сервис выставок.
  */
 @Service
-@RequiredArgsConstructor
 @Log4j2
 public class ExhibitionService {
 
     private final ExhibitionRepository exhibitionRepository;
+
+    public ExhibitionService(ExhibitionRepository exhibitionRepository) {
+        this.exhibitionRepository = exhibitionRepository;
+    }
 
     /**
      * Retrieves all exhibitions.
@@ -45,7 +47,7 @@ public class ExhibitionService {
         return exhibitionRepository.findById(id)
             .map(ExhibitionConverter::toTransferObject)
             .orElseThrow(() -> {
-                log.error("Exhibition with ID {} not found", id);
+                //log.error("Exhibition with ID {} not found", id);
                 return new RuntimeException("Exhibition not found");
             });
     }
@@ -72,18 +74,18 @@ public class ExhibitionService {
     public ExhibitionTO updateExhibition(UUID id, ExhibitionTO exhibitionTO) {
         Exhibition existingExhibition = exhibitionRepository.findById(id)
             .orElseThrow(() -> {
-                log.error("Exhibition with ID {} not found for update", id);
+                //log.error("Exhibition with ID {} not found for update", id);
                 return new RuntimeException("Exhibition not found");
             });
 
-        existingExhibition.setName(exhibitionTO.getName());
-        existingExhibition.setDescription(exhibitionTO.getDescription());
-        existingExhibition.setLocation(exhibitionTO.getLocation());
-        existingExhibition.setDate(exhibitionTO.getDate());
-        existingExhibition.setTime(exhibitionTO.getTime());
-        existingExhibition.setPrice(exhibitionTO.getPrice());
-        existingExhibition.setImage(exhibitionTO.getImage());
-        existingExhibition.setRating(exhibitionTO.getRating());
+//        existingExhibition.setName(exhibitionTO.getName());
+//        existingExhibition.setDescription(exhibitionTO.getDescription());
+//        existingExhibition.setLocation(exhibitionTO.getLocation());
+//        existingExhibition.setDate(exhibitionTO.getDate());
+//        existingExhibition.setTime(exhibitionTO.getTime());
+//        existingExhibition.setPrice(exhibitionTO.getPrice());
+//        existingExhibition.setImage(exhibitionTO.getImage());
+//        existingExhibition.setRating(exhibitionTO.getRating());
 
         Exhibition updatedExhibition = exhibitionRepository.save(existingExhibition);
         return ExhibitionConverter.toTransferObject(updatedExhibition);
@@ -97,7 +99,7 @@ public class ExhibitionService {
     public void deleteExhibition(UUID id) {
         Optional<Exhibition> exhibitionOptional = exhibitionRepository.findById(id);
         if (exhibitionOptional.isEmpty()) {
-            log.error("Exhibition with ID {} not found for deletion", id);
+            //log.error("Exhibition with ID {} not found for deletion", id);
             throw new RuntimeException("Exhibition not found");
         }
 

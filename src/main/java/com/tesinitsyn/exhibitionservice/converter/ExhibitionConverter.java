@@ -1,8 +1,14 @@
 package com.tesinitsyn.exhibitionservice.converter;
 
-import com.tesinitsyn.exhibitionservice.dto.ExhibitionTO;
-import com.tesinitsyn.exhibitionservice.model.Exhibition;
 
+import com.tesinitsyn.exhibitionservice.model.Exhibition;
+import com.tesinitsyn.exhibitionservice.transfer.ExhibitionTO;
+import org.springframework.stereotype.Component;
+
+/**
+ * Конвертер для сущности выставки.
+ */
+@Component
 public class ExhibitionConverter {
 
     /**
@@ -17,15 +23,15 @@ public class ExhibitionConverter {
         }
 
         ExhibitionTO exhibitionTO = new ExhibitionTO();
-        exhibitionTO.setId(exhibition.getId());
-        exhibitionTO.setName(exhibition.getName());
-        exhibitionTO.setDescription(exhibition.getDescription());
-        exhibitionTO.setLocation(exhibition.getLocation());
-        exhibitionTO.setDate(exhibition.getDate());
-        exhibitionTO.setTime(exhibition.getTime());
-        exhibitionTO.setPrice(exhibition.getPrice());
-        exhibitionTO.setImage(exhibition.getImage());
-        exhibitionTO.setRating(exhibition.getRating());
+//        exhibitionTO.setId(exhibition.getId());
+//        exhibitionTO.setName(exhibition.getName());
+//        exhibitionTO.setDescription(exhibition.getDescription());
+//        exhibitionTO.setLocation(exhibition.getLocation());
+//        exhibitionTO.setDate(exhibition.getDate());
+//        exhibitionTO.setTime(exhibition.getTime());
+//        exhibitionTO.setPrice(exhibition.getPrice());
+//        exhibitionTO.setImage(exhibition.getImage());
+//        exhibitionTO.setRating(exhibition.getRating());
 
         return exhibitionTO;
     }
@@ -42,15 +48,15 @@ public class ExhibitionConverter {
         }
 
         Exhibition exhibition = new Exhibition();
-        exhibition.setId(exhibitionTO.getId());
-        exhibition.setName(exhibitionTO.getName());
-        exhibition.setDescription(exhibitionTO.getDescription());
-        exhibition.setLocation(exhibitionTO.getLocation());
-        exhibition.setDate(exhibitionTO.getDate());
-        exhibition.setTime(exhibitionTO.getTime());
-        exhibition.setPrice(exhibitionTO.getPrice());
-        exhibition.setImage(exhibitionTO.getImage());
-        exhibition.setRating(exhibitionTO.getRating());
+//        exhibition.setId(exhibitionTO.getId());
+//        exhibition.setName(exhibitionTO.getName());
+//        exhibition.setDescription(exhibitionTO.getDescription());
+//        exhibition.setLocation(exhibitionTO.getLocation());
+//        exhibition.setDate(exhibitionTO.getDate());
+//        exhibition.setTime(exhibitionTO.getTime());
+//        exhibition.setPrice(exhibitionTO.getPrice());
+//        exhibition.setImage(exhibitionTO.getImage());
+//        exhibition.setRating(exhibitionTO.getRating());
 
         return exhibition;
     }
