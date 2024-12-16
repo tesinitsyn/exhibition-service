@@ -3,6 +3,7 @@ package com.tesinitsyn.exhibitionservice.converter;
 
 import com.tesinitsyn.exhibitionservice.model.Exhibition;
 import com.tesinitsyn.exhibitionservice.transfer.ExhibitionTO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,18 +22,17 @@ public class ExhibitionConverter {
         if (exhibition == null) {
             return null;
         }
-
-        ExhibitionTO exhibitionTO = new ExhibitionTO();
-        exhibitionTO.setId(exhibition.getId());
-        exhibitionTO.setName(exhibition.getName());
-        exhibitionTO.setDescription(exhibition.getDescription());
-        exhibitionTO.setLocation(exhibition.getLocation());
-        exhibitionTO.setDate(exhibition.getDate());
-        exhibitionTO.setTime(exhibition.getTime());
-        exhibitionTO.setPrice(exhibition.getPrice());
-        exhibitionTO.setImage(exhibition.getImage());
-        exhibitionTO.setRating(exhibition.getRating());
-        return exhibitionTO;
+        // Мб вкусовщина, но билдер тут выглядит уместно
+        return ExhibitionTO.builder()
+                .id(exhibition.getId())
+                .name(exhibition.getName())
+                .description(exhibition.getDescription())
+                .location(exhibition.getLocation())
+                .date(exhibition.getDate())
+                .time(exhibition.getTime())
+                .price(exhibition.getPrice())
+                .image(exhibition.getImage())
+                .rating(exhibition.getRating()).build();
     }
 
     /**
@@ -47,15 +47,8 @@ public class ExhibitionConverter {
         }
 
         Exhibition exhibition = new Exhibition();
-        exhibition.setId(exhibitionTO.getId());
-        exhibition.setName(exhibitionTO.getName());
-        exhibition.setDescription(exhibitionTO.getDescription());
-        exhibition.setLocation(exhibitionTO.getLocation());
-        exhibition.setDate(exhibitionTO.getDate());
-        exhibition.setTime(exhibitionTO.getTime());
-        exhibition.setPrice(exhibitionTO.getPrice());
-        exhibition.setImage(exhibitionTO.getImage());
-        exhibition.setRating(exhibitionTO.getRating());
+        //только если у полей одинаковые имена и совместимые типы
+        BeanUtils.copyProperties(exhibitionTO, exhibition);
         return exhibition;
     }
 }
