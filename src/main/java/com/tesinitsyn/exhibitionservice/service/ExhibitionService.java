@@ -1,11 +1,11 @@
 package com.tesinitsyn.exhibitionservice.service;
 
 import com.tesinitsyn.exhibitionservice.converter.ExhibitionConverter;
-import com.tesinitsyn.exhibitionservice.transfer.ExhibitionTO;
 import com.tesinitsyn.exhibitionservice.model.Exhibition;
 import com.tesinitsyn.exhibitionservice.repository.ExhibitionRepository;
-import lombok.RequiredArgsConstructor;
+import com.tesinitsyn.exhibitionservice.transfer.ExhibitionTO;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,8 +33,8 @@ public class ExhibitionService {
      */
     public List<ExhibitionTO> getAllExhibitions() {
         return exhibitionRepository.findAll().stream()
-            .map(ExhibitionConverter::toTransferObject)
-            .collect(Collectors.toList());
+                .map(ExhibitionConverter::toTransferObject)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -45,11 +45,11 @@ public class ExhibitionService {
      */
     public ExhibitionTO getExhibitionById(UUID id) {
         return exhibitionRepository.findById(id)
-            .map(ExhibitionConverter::toTransferObject)
-            .orElseThrow(() -> {
-                log.error("Exhibition with ID {} not found", id);
-                return new RuntimeException("Exhibition not found");
-            });
+                .map(ExhibitionConverter::toTransferObject)
+                .orElseThrow(() -> {
+                    log.error("Exhibition with ID {} not found", id);
+                    return new RuntimeException("Exhibition not found");
+                });
     }
 
     /**
@@ -73,19 +73,13 @@ public class ExhibitionService {
      */
     public ExhibitionTO updateExhibition(UUID id, ExhibitionTO exhibitionTO) {
         Exhibition existingExhibition = exhibitionRepository.findById(id)
-            .orElseThrow(() -> {
-                log.error("Exhibition with ID {} not found for update", id);
-                return new RuntimeException("Exhibition not found");
-            });
+                .orElseThrow(() -> {
+                    log.error("Exhibition with ID {} not found for update", id);
+                    return new RuntimeException("Exhibition not found");
+                });
 
-        existingExhibition.setName(exhibitionTO.getName());
-        existingExhibition.setDescription(exhibitionTO.getDescription());
-        existingExhibition.setLocation(exhibitionTO.getLocation());
-        existingExhibition.setDate(exhibitionTO.getDate());
-        existingExhibition.setTime(exhibitionTO.getTime());
-        existingExhibition.setPrice(exhibitionTO.getPrice());
-        existingExhibition.setImage(exhibitionTO.getImage());
-        existingExhibition.setRating(exhibitionTO.getRating());
+        // Можно указать поля которые нужно игнорить при копировании
+        BeanUtils.copyProperties(exhibitionTO, existingExhibition, "id");
 
         Exhibition updatedExhibition = exhibitionRepository.save(existingExhibition);
         return ExhibitionConverter.toTransferObject(updatedExhibition);
