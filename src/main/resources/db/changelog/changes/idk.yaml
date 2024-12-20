@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1-create-exhibition-table
+      author: yourname
+      changes:
+        - createTable:
+            tableName: exhibition
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: location
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time
+                  type: VARCHAR(255)
+              - column:
+                  name: price
+                  type: VARCHAR(255)
+              - column:
+                  name: image
+                  type: VARCHAR(255)
+              - column:
+                  name: rating
+                  type: FLOAT

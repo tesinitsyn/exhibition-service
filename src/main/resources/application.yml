@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: exhibition-service
+    version: @project.version@
+  datasource:
+    host: amvera-tesinitsyn-cnpg-pg-rw
+    port: 5432
+    database: recipebd
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database}
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+server:
+  port: 8080
